@@ -31,14 +31,17 @@ const UserProfile = () => {
   useEffect(() => {
     if (text === 'Created') {
       const createdPinsQuery = userCreatedPinsQuery(userId);
-
+        console.log(userCreatedPinsQuery);
       client.fetch(createdPinsQuery).then((data) => {
+        
         setPins(data);
+        
       });
     } else {
       const savedPinsQuery = userSavedPinsQuery(userId);
 
       client.fetch(savedPinsQuery).then((data) => {
+        console.log({data});
         setPins(data);
       });
     }
@@ -49,6 +52,8 @@ const UserProfile = () => {
 
     navigate('/login');
   };
+
+  
 
   if (!user) return <Spinner message="Loading profile" />;
 
@@ -117,9 +122,9 @@ const UserProfile = () => {
         <div className="px-2">
           <MasonryLayout pins={pins} />
         </div>
-
+            
         {pins?.length === 0 && (
-        <div className="flex justify-center font-bold items-center w-full text-1xl mt-2">
+        <div className="flex justify-center font-bold items-center w-full text-xl mt-2">
           No Pins Found!
         </div>
         )}
